@@ -8,14 +8,9 @@ class ApiService {
   ApiService(this._dio);
 
   Future<HttpResponse<List<Photos>>> getPhotos(
-      {required RequestModel request,
-      required String url,
-      required bool isItSearch}) async {
-    final response =
-        await _dio.get(url, queryParameters: request.toJson(isItSearch));
-
-    final rowData = response.data;
-    final data = ResponseModel.fromJson(rowData);
+      {required RequestModel request, required String url}) async {
+    final response = await _dio.get(url, queryParameters: request.toJson());
+    final data = ResponseModel.fromJson(response.data);
 
     return HttpResponse(data.photos!, response);
   }

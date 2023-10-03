@@ -1,5 +1,5 @@
 class RequestModel {
-  final String query;
+  final String? query;
   final int page, perPage;
 
   RequestModel({
@@ -8,8 +8,8 @@ class RequestModel {
     required this.perPage,
   });
 
-  Map<String, dynamic> toJson(bool isItSearch) {
-    return isItSearch ? _forSearch() : _forCurated();
+  Map<String, dynamic> toJson() {
+    return query != null ? _forSearch() : _forCurated();
   }
 
   Map<String, dynamic> _forSearch() {
